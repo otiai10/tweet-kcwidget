@@ -1,0 +1,8 @@
+test-results/
+tmp/
+routes/
+*.out
+*.log
+
+conf/my
+conf/app.conf
