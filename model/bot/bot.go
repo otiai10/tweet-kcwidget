@@ -6,46 +6,46 @@ import "tweet-kcwidget/model/tweet"
 import "time"
 
 type MyBot struct {
-    consumer *oauth.Consumer
-    token *oauth.AccessToken
-    tweet tweet.Tweet
-    RestBegin int
-    RestEnd int
+	consumer  *oauth.Consumer
+	token     *oauth.AccessToken
+	tweet     tweet.Tweet
+	RestBegin int
+	RestEnd   int
 }
 
 func New(
-        consumer *oauth.Consumer,
-        token *oauth.AccessToken,
-        tweet tweet.Tweet,
-        restBeginHour int,
-        restEndHour int,
-    ) *MyBot {
-    return &MyBot{
-        consumer: consumer,
-        token: token,
-        tweet: tweet,
-        RestBegin: restBeginHour,
-        RestEnd: restEndHour,
-    }
+	consumer *oauth.Consumer,
+	token *oauth.AccessToken,
+	tweet tweet.Tweet,
+	restBeginHour int,
+	restEndHour int,
+) *MyBot {
+	return &MyBot{
+		consumer:  consumer,
+		token:     token,
+		tweet:     tweet,
+		RestBegin: restBeginHour,
+		RestEnd:   restEndHour,
+	}
 }
 
 func (b *MyBot) Tweet() (e error) {
-    _, e = b.consumer.Post(
-        "https://api.twitter.com/1.1/statuses/update.json",
-        map[string]string{
-            "status": b.tweet.ToText(),
-        },
-        b.token,
-    )
-    return e
+	_, e = b.consumer.Post(
+		"https://api.twitter.com/1.1/statuses/update.json",
+		map[string]string{
+			"status": b.tweet.ToText(),
+		},
+		b.token,
+	)
+	return e
 }
 
 func (b *MyBot) IsRest() bool {
-    hour := time.Now().Hour()
-    if b.RestBegin < hour && hour <= b.RestEnd {
-        return true
-    }
-    return false
+	hour := time.Now().Hour()
+	if b.RestBegin < hour && hour <= b.RestEnd {
+		return true
+	}
+	return false
 }
 
 var provider = oauth.ServiceProvider{

@@ -37,9 +37,9 @@ func (c Tweet) Mission(finish_time int64, screen_name, message, client_token str
 		})
 	}
 	q := queue.New(
-        finish_time,
-        tweet.New(screen_name, message, tweet.TypeMission),
-    )
+		finish_time,
+		tweet.New(screen_name, message, tweet.TypeMission),
+	)
 	queue.Enq(q)
 	return c.RenderJson(&map[string]string{
 		"result":  "ok",
@@ -54,9 +54,9 @@ func (c Tweet) Nyukyo(finish_time int64, screen_name, message, client_token stri
 		})
 	}
 	q := queue.New(
-        finish_time,
-        tweet.New(screen_name, message, tweet.TypeNyukyo),
-    )
+		finish_time,
+		tweet.New(screen_name, message, tweet.TypeNyukyo),
+	)
 	queue.Enq(q)
 	return c.RenderJson(&map[string]string{
 		"result":  "ok",
@@ -71,9 +71,9 @@ func (c Tweet) Createship(finish_time int64, screen_name, message, client_token 
 		})
 	}
 	q := queue.New(
-        finish_time,
-        tweet.New(screen_name, message, tweet.TypeCreateship),
-    )
+		finish_time,
+		tweet.New(screen_name, message, tweet.TypeCreateship),
+	)
 	queue.Enq(q)
 	return c.RenderJson(&map[string]string{
 		"result":  "ok",
@@ -88,9 +88,9 @@ func (c Tweet) Sortie(finish_time int64, screen_name, message, client_token stri
 		})
 	}
 	q := queue.New(
-        finish_time,
-        tweet.New(screen_name, message, tweet.TypeSortie),
-    )
+		finish_time,
+		tweet.New(screen_name, message, tweet.TypeSortie),
+	)
 	queue.Enq(q)
 	return c.RenderJson(&map[string]string{
 		"result":  "ok",
@@ -103,7 +103,7 @@ func init() {
 		for {
 			tweetToTweet := <-queue.Ch
 			myBot := bot.Manage(tweetToTweet)
-            e := myBot.Tweet()
+			e := myBot.Tweet()
 			if e != nil {
 				fmt.Printf("%+v", e)
 			}
