@@ -9,6 +9,13 @@ type Tweet struct {
 	Kind         int
 }
 
+var (
+	TypeMission    = 0
+	TypeNyukyo     = 1
+	TypeCreateship = 2
+	TypeSortie     = 3
+)
+
 var tweet_format = "@%s %s %s"
 
 func New(screen_name, message string, kind int) Tweet {
