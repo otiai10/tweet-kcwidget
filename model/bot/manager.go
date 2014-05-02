@@ -43,7 +43,7 @@ func get00(tw tweet.Tweet) *MyBot {
 		token00,
 		tw,
 		0,
-		8,
+		6,
 	)
 }
 func get01(tw tweet.Tweet) *MyBot {
@@ -52,18 +52,19 @@ func get01(tw tweet.Tweet) *MyBot {
 		twitter01,
 		token01,
 		tw,
-		8,
-		16,
+		6,
+		12,
 	)
 }
+// おなくなりになった
 func get02(tw tweet.Tweet) *MyBot {
 	fmt.Println("2号ちゃん")
 	return New(
 		twitter02,
 		token02,
 		tw,
-		16,
-		24,
+		12,
+		18,
 	)
 }
 func get03(tw tweet.Tweet) *MyBot {
@@ -72,7 +73,7 @@ func get03(tw tweet.Tweet) *MyBot {
 		twitter03,
 		token03,
 		tw,
-		8,
-		16,
+		6,
+		12,
 	)
 }
