@@ -3,8 +3,50 @@ package bot
 import "github.com/mrjones/oauth"
 import "tweet-kcwidget/conf/my"
 import "tweet-kcwidget/model/tweet"
+import "time"
 
-import "fmt"
+type MyBot struct {
+    consumer *oauth.Consumer
+    token *oauth.AccessToken
+    tweet tweet.Tweet
+    RestBegin int
+    RestEnd int
+}
+
+func New(
+        consumer *oauth.Consumer,
+        token *oauth.AccessToken,
+        tweet tweet.Tweet,
+        restBeginHour int,
+        restEndHour int,
+    ) *MyBot {
+    return &MyBot{
+        consumer: consumer,
+        token: token,
+        tweet: tweet,
+        RestBegin: restBeginHour,
+        RestEnd: restEndHour,
+    }
+}
+
+func (b *MyBot) Tweet() (e error) {
+    _, e = b.consumer.Post(
+        "https://api.twitter.com/1.1/statuses/update.json",
+        map[string]string{
+            "status": b.tweet.ToText(),
+        },
+        b.token,
+    )
+    return e
+}
+
+func (b *MyBot) IsRest() bool {
+    hour := time.Now().Hour()
+    if b.RestBegin < hour && hour <= b.RestEnd {
+        return true
+    }
+    return false
+}
 
 var provider = oauth.ServiceProvider{
 	AuthorizeTokenUrl: "https://api.twitter.com/oauth/authorize",
@@ -52,42 +94,13 @@ var token02 = &oauth.AccessToken{
 	my.Bot02AccessTokenSecret,
 	make(map[string]string),
 }
-
-func Get(tweetToTweet tweet.Tweet) (consumer *oauth.Consumer, token *oauth.AccessToken) {
-    switch tweetToTweet.Kind {
-    case tweet.TypeMission:
-        return getDefault()
-    case tweet.TypeNyukyo:
-        return get00()
-    case tweet.TypeCreateship:
-        return get01()
-    case tweet.TypeSortie:
-        return get02()
-    }
-	return getDefault()
-}
-
-func getDefault() (consumer *oauth.Consumer, token *oauth.AccessToken) {
-    fmt.Println("use デフォルトちゃん")
-    consumer = twitter_def
-    token = token_def
-    return
-}
-func get00() (consumer *oauth.Consumer, token *oauth.AccessToken) {
-    fmt.Println("use 0号ちゃん")
-    consumer = twitter00
-    token = token00
-    return
-}
-func get01() (consumer *oauth.Consumer, token *oauth.AccessToken) {
-    fmt.Println("use 1号ちゃん")
-    consumer = twitter01
-    token = token01
-    return
-}
-func get02() (consumer *oauth.Consumer, token *oauth.AccessToken) {
-    fmt.Println("use 2号ちゃん")
-    consumer = twitter02
-    token = token02
-    return
+var twitter03 = oauth.NewConsumer(
+	my.App03ConsumerKey,
+	my.App03ConsumerSecret,
+	provider,
+)
+var token03 = &oauth.AccessToken{
+	my.Bot03AccessToken,
+	my.Bot03AccessTokenSecret,
+	make(map[string]string),
 }

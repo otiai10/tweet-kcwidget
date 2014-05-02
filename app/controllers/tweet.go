@@ -102,14 +102,8 @@ func init() {
 	go func() {
 		for {
 			tweetToTweet := <-queue.Ch
-			consumer, token := bot.Get(tweetToTweet)
-			_, e := consumer.Post(
-				"https://api.twitter.com/1.1/statuses/update.json",
-				map[string]string{
-					"status": tweetToTweet.ToText(),
-				},
-				token,
-			)
+			myBot := bot.Manage(tweetToTweet)
+            e := myBot.Tweet()
 			if e != nil {
 				fmt.Printf("%+v", e)
 			}
