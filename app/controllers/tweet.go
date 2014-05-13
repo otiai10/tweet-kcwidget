@@ -6,8 +6,6 @@ import "tweet-kcwidget/model/queue"
 import "tweet-kcwidget/model/tweet"
 import "tweet-kcwidget/model/bot"
 
-import "fmt"
-
 type Tweet struct {
 	*revel.Controller
 }
@@ -105,7 +103,7 @@ func init() {
 			myBot := bot.Manage(tweetToTweet)
 			e := myBot.Tweet()
 			if e != nil {
-				fmt.Printf("%+v", e)
+				revel.ERROR.Println(e)
 			}
 		}
 	}()
