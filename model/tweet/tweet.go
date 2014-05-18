@@ -27,6 +27,6 @@ func New(screen_name, message string, kind int) Tweet {
 }
 
 func (t Tweet) ToText() string {
-    debug_suffix := time.Now().Format("15時04分")
+	debug_suffix := time.Now().Format("15時04分05")
 	return fmt.Sprintf(tweet_format, t.ToScreenName, t.Message, debug_suffix)
 }
