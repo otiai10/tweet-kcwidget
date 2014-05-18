@@ -104,6 +104,10 @@ func init() {
 			if e := theBot.Tweet(queuedTweet); e != nil {
 				revel.ERROR.Println(e)
 			}
+
+			if e := bot.GetRandom().Monologue(); e != nil {
+				revel.ERROR.Println("[mono]", e)
+			}
 		}
 	}()
 }

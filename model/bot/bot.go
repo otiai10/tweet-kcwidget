@@ -18,6 +18,7 @@ var consumer = oauth.NewConsumer(
 )
 
 type Bot struct {
+	Name  string
 	token my.AccessToken
 }
 

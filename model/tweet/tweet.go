@@ -10,13 +10,16 @@ type Tweet struct {
 }
 
 var (
-	TypeMission    = 0
-	TypeNyukyo     = 1
-	TypeCreateship = 2
-	TypeSortie     = 3
+	TypeMonologue  = 0
+	TypeMission    = 1
+	TypeNyukyo     = 2
+	TypeCreateship = 3
+	TypeSortie     = 4
 )
-
-var tweet_format = "@%s %s %s"
+var (
+	mention_format   = "@%s %s %s"
+	monologue_format = "%s %s"
+)
 
 func New(screen_name, message string, kind int) Tweet {
 	return Tweet{
@@ -27,6 +30,16 @@ func New(screen_name, message string, kind int) Tweet {
 }
 
 func (t Tweet) ToText() string {
+	if t.Kind == TypeMonologue {
+		return t.toMonologueText()
+	}
+	return t.toMentionText()
+}
+func (t Tweet) toMentionText() string {
 	debug_suffix := time.Now().Format("15時04分05")
-	return fmt.Sprintf(tweet_format, t.ToScreenName, t.Message, debug_suffix)
+	return fmt.Sprintf(mention_format, t.ToScreenName, t.Message, debug_suffix)
+}
+func (t Tweet) toMonologueText() string {
+	debug_suffix := time.Now().Format("15時04分05")
+	return fmt.Sprintf(monologue_format, t.Message, debug_suffix)
 }

@@ -42,7 +42,7 @@ var roster = map[int]map[int]string{
 
 func GetByName(name string) Bot {
 	theToken := my.BotTokens[name]
-	return Bot{theToken}
+	return Bot{name, theToken}
 }
 func GetAssigned(tw tweet.Tweet) Bot {
 	candidates := roster[tw.Kind]
