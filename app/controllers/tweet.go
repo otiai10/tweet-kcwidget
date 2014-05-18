@@ -100,7 +100,7 @@ func init() {
 	go func() {
 		for {
 			queuedTweet := <-queue.Ch
-			theBot := bot.GetRandom()
+			theBot := bot.GetAssigned(queuedTweet)
 			if e := theBot.Tweet(queuedTweet); e != nil {
 				revel.ERROR.Println(e)
 			}

@@ -5,13 +5,50 @@ import "tweet-kcwidget/model/tweet"
 import "math/rand"
 import "time"
 
+var roster = map[int]map[int]string{
+	tweet.TypeMission: {
+		0:  "otiai10",
+		4:  "otiai10",
+		8:  "otiai10",
+		12: "otiai10",
+		16: "otiai10",
+		20: "otiai10",
+	},
+	tweet.TypeNyukyo: {
+		0:  "otiai10",
+		4:  "otiai10",
+		8:  "otiai10",
+		12: "otiai10",
+		16: "otiai10",
+		20: "otiai10",
+	},
+	tweet.TypeCreateship: {
+		0:  "otiai10",
+		4:  "otiai10",
+		8:  "otiai10",
+		12: "otiai10",
+		16: "otiai10",
+		20: "otiai10",
+	},
+	tweet.TypeSortie: {
+		0:  "otiai10",
+		4:  "otiai10",
+		8:  "otiai10",
+		12: "otiai10",
+		16: "otiai10",
+		20: "otiai10",
+	},
+}
+
 func GetByName(name string) Bot {
 	theToken := my.BotTokens[name]
 	return Bot{theToken}
 }
 func GetAssigned(tw tweet.Tweet) Bot {
-	// TODO: ここにロジック書く
-	return GetByName("Yudachi_kcw")
+	candidates := roster[tw.Kind]
+	hour := time.Now().Hour()
+	key := hour - (hour % len(candidates))
+	return GetByName(candidates[key])
 }
 func GetRandom() Bot {
 	name := pickUpRandom(getAllNames())
