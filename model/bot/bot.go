@@ -18,14 +18,6 @@ var consumer = oauth.NewConsumer(
 type Bot struct {
     token my.AccessToken
 }
-func GetByName(name string) Bot {
-    theToken := my.BotTokens[name]
-    return Bot{theToken}
-}
-func GetAssigned(tw tweet.Tweet) Bot {
-    // TODO: ここにロジック書く
-    return GetByName("otiai10")
-}
 func (b Bot)Tweet(tw tweet.Tweet) (e error) {
     token := &oauth.AccessToken{
         b.token.Token,
