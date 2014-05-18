@@ -3,104 +3,41 @@ package bot
 import "github.com/mrjones/oauth"
 import "tweet-kcwidget/conf/my"
 import "tweet-kcwidget/model/tweet"
-import "time"
-
-type MyBot struct {
-	consumer  *oauth.Consumer
-	token     *oauth.AccessToken
-	tweet     tweet.Tweet
-	RestBegin int
-	RestEnd   int
-}
-
-func New(
-	consumer *oauth.Consumer,
-	token *oauth.AccessToken,
-	tweet tweet.Tweet,
-	restBeginHour int,
-	restEndHour int,
-) *MyBot {
-	return &MyBot{
-		consumer:  consumer,
-		token:     token,
-		tweet:     tweet,
-		RestBegin: restBeginHour,
-		RestEnd:   restEndHour,
-	}
-}
-
-func (b *MyBot) Tweet() (e error) {
-	_, e = b.consumer.Post(
-		"https://api.twitter.com/1.1/statuses/update.json",
-		map[string]string{
-			"status": b.tweet.ToText(),
-		},
-		b.token,
-	)
-	return e
-}
-
-func (b *MyBot) IsRest() bool {
-	hour := time.Now().Hour()
-	if b.RestBegin < hour && hour <= b.RestEnd {
-		return true
-	}
-	return false
-}
+// import "time"
 
 var provider = oauth.ServiceProvider{
 	AuthorizeTokenUrl: "https://api.twitter.com/oauth/authorize",
 	RequestTokenUrl:   "https://api.twitter.com/oauth/request_token",
 	AccessTokenUrl:    "https://api.twitter.com/oauth/access_token",
 }
-
-var twitter_def = oauth.NewConsumer(
-	my.AppConsumerKey,
-	my.AppConsumerSecret,
-	provider,
+var consumer = oauth.NewConsumer(
+    my.ConsumerKey,
+    my.ConsumerSecret,
+    provider,
 )
-var token_def = &oauth.AccessToken{
-	my.BotAccessToken,
-	my.BotAccessTokenSecret,
-	make(map[string]string),
+type Bot struct {
+    token my.AccessToken
 }
-var twitter00 = oauth.NewConsumer(
-	my.App00ConsumerKey,
-	my.App00ConsumerSecret,
-	provider,
-)
-var token00 = &oauth.AccessToken{
-	my.Bot00AccessToken,
-	my.Bot00AccessTokenSecret,
-	make(map[string]string),
+func GetByName(name string) Bot {
+    theToken := my.BotTokens[name]
+    return Bot{theToken}
 }
-var twitter01 = oauth.NewConsumer(
-	my.App01ConsumerKey,
-	my.App01ConsumerSecret,
-	provider,
-)
-var token01 = &oauth.AccessToken{
-	my.Bot01AccessToken,
-	my.Bot01AccessTokenSecret,
-	make(map[string]string),
+func GetAssigned(tw tweet.Tweet) Bot {
+    // TODO: ここにロジック書く
+    return GetByName("otiai10")
 }
-var twitter02 = oauth.NewConsumer(
-	my.App02ConsumerKey,
-	my.App02ConsumerSecret,
-	provider,
-)
-var token02 = &oauth.AccessToken{
-	my.Bot02AccessToken,
-	my.Bot02AccessTokenSecret,
-	make(map[string]string),
-}
-var twitter03 = oauth.NewConsumer(
-	my.App03ConsumerKey,
-	my.App03ConsumerSecret,
-	provider,
-)
-var token03 = &oauth.AccessToken{
-	my.Bot03AccessToken,
-	my.Bot03AccessTokenSecret,
-	make(map[string]string),
+func (b Bot)Tweet(tw tweet.Tweet) (e error) {
+    token := &oauth.AccessToken{
+        b.token.Token,
+        b.token.Secret,
+        make(map[string]string),
+    }
+    _, e = consumer.Post(
+            "https://api.twitter.com/1.1/statuses/update.json",
+            map[string]string{
+                "status": tw.ToText(),
+            },
+            token,
+     )
+    return
 }

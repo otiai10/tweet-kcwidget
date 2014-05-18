@@ -99,10 +99,9 @@ func (c Tweet) Sortie(finish_time int64, screen_name, message, client_token stri
 func init() {
 	go func() {
 		for {
-			tweetToTweet := <-queue.Ch
-			myBot := bot.Manage(tweetToTweet)
-			e := myBot.Tweet()
-			if e != nil {
+			queuedTweet := <-queue.Ch
+            theBot := bot.GetAssigned(queuedTweet)
+			if e := theBot.Tweet(queuedTweet); e != nil {
 				revel.ERROR.Println(e)
 			}
 		}

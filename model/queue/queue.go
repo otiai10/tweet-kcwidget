@@ -25,7 +25,7 @@ func getDurationFromUnix(finish_time int64) (dur time.Duration) {
 	now := time.Now().Unix()
 	diff := int(finish_time - now - 60)
 	if diff < 0 {
-		return
+        diff = 0
 	}
 	dur, _ = time.ParseDuration(strconv.Itoa(diff) + "s")
 	return
