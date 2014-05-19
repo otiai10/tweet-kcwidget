@@ -18,9 +18,16 @@ div.box {
 }
 div.box>div.tl {
     margin-right: 22px;
+    width: 23%;
 }
 h3.bot-name {
     text-align: center;
+}
+div.thanks {
+    margin-bottom: 30px;
+}
+div.thanks>h3 {
+    margin: 0;
 }
 
 article,
