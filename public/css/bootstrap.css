@@ -18,6 +18,7 @@ div.box {
 }
 div.box>div.tl {
     margin-right: 22px;
+    margin-bottom: 22px;
     width: 23%;
 }
 h3.bot-name {
