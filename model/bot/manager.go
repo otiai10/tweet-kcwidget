@@ -5,41 +5,6 @@ import "tweet-kcwidget/model/tweet"
 import "math/rand"
 import "time"
 
-var roster = map[int]map[int]string{
-	tweet.TypeMission: {
-		0:  "Yudachi_kcw",
-		4:  "Yudachi_kcw",
-		8:  "Yudachi_kcw",
-		12: "Yudachi_kcw",
-		16: "Yudachi_kcw",
-		20: "Yudachi_kcw",
-	},
-	tweet.TypeNyukyo: {
-		0:  "Yudachi_kcw",
-		4:  "Yudachi_kcw",
-		8:  "Yudachi_kcw",
-		12: "Yudachi_kcw",
-		16: "Yudachi_kcw",
-		20: "Yudachi_kcw",
-	},
-	tweet.TypeCreateship: {
-		0:  "Yudachi_kcw",
-		4:  "Yudachi_kcw",
-		8:  "Yudachi_kcw",
-		12: "Yudachi_kcw",
-		16: "Yudachi_kcw",
-		20: "Yudachi_kcw",
-	},
-	tweet.TypeSortie: {
-		0:  "Yudachi_kcw",
-		4:  "Yudachi_kcw",
-		8:  "Yudachi_kcw",
-		12: "Yudachi_kcw",
-		16: "Yudachi_kcw",
-		20: "Yudachi_kcw",
-	},
-}
-
 func GetByName(name string) Bot {
 	theToken := my.BotTokens[name]
 	return Bot{name, theToken}
