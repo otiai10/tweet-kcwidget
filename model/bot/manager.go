@@ -47,7 +47,7 @@ func GetByName(name string) Bot {
 func GetAssigned(tw tweet.Tweet) Bot {
 	candidates := roster[tw.Kind]
 	hour := time.Now().Hour()
-	key := hour - (hour % len(candidates))
+	key := hour - (hour % (24 / len(candidates)))
 	return GetByName(candidates[key])
 }
 func GetRandom() Bot {
