@@ -40,6 +40,6 @@ func (t Tweet) toMentionText() string {
 	return fmt.Sprintf(mention_format, t.ToScreenName, t.Message, debug_suffix)
 }
 func (t Tweet) toMonologueText() string {
-	debug_suffix := time.Now().Format("15時04分05")
+	debug_suffix := time.Now().Format("15:04")
 	return fmt.Sprintf(monologue_format, t.Message, debug_suffix)
 }
