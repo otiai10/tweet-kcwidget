@@ -61,7 +61,7 @@ var monologues = map[string][]string{
 	"Hiei_kcw": {
 		"（アイコン描いてくれるひと & ひとりごとセリフ募集中です...！）",
 	},
-	"Makigumo_kcw": {
+	"Oboro_kcw": {
 		"（アイコン描いてくれるひと & ひとりごとセリフ募集中です...！）",
 	},
 	"Ryujo_kcw": {
