@@ -15,7 +15,7 @@ func (b Bot) Monologue() (e error) {
 	// とりあえずランダムで5分の1くらいにしぼる
 	// TODO: ちゃんとする
 	rand.Seed(time.Now().Unix())
-	if rnd := rand.Intn(100); rnd < 80 {
+	if rnd := rand.Intn(100); rnd < 90 {
 		return
 	}
 	tw := getMonologueTweetByName(b.Name)
