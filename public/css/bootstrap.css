@@ -7,6 +7,18 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
+div.tl.mission {
+    background-color: #ccffff;
+}
+div.tl.sortie {
+    background-color: #fff0f0;
+}
+div.tl.nyukyo {
+    background-color: #ccffcc;
+}
+div.tl.createship {
+    background-color: #ffcc99;
+}
 
 body {
     padding-bottom: 20px;
@@ -20,6 +32,7 @@ div.box>div.tl {
     margin-right: 22px;
     margin-bottom: 22px;
     width: 23%;
+    border-radius: 5px;
 }
 h3.bot-name {
     text-align: center;
