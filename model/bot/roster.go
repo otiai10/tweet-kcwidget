@@ -7,7 +7,7 @@ var roster = map[int]map[int]string{
 		0:  "Yudachi_kcw",
 		2:  "Kaga_kcw",
 		4:  "Akagi_kcw",
-		6:  "401_kcw",
+		6:  "Shioi_kcw",
 		8:  "Shimakaze_kcw",
 		10: "Hibiki_kcw",
 		12: "Inazuma_kcw",
