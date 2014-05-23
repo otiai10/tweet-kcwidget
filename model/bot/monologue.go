@@ -4,7 +4,7 @@ import "tweet-kcwidget/model/tweet"
 import "math/rand"
 import "time"
 
-func getMonologueTweetByName(name string) tweet.Tweet {
+func GetMonologueTweetByName(name string) tweet.Tweet {
 	return tweet.New(
 		"",
 		pickUpRandom(monologues[name]),
@@ -18,6 +18,6 @@ func (b Bot) Monologue() (e error) {
 	if rnd := rand.Intn(100); rnd < 90 {
 		return
 	}
-	tw := getMonologueTweetByName(b.Name)
+	tw := GetMonologueTweetByName(b.Name)
 	return b.Tweet(tw)
 }

@@ -19,7 +19,7 @@ func GetAssigned(tw tweet.Tweet) Bot {
 	return GetByName(pickUpRandom(candidates))
 }
 func GetRandom() Bot {
-	name := pickUpRandom(getAllNames())
+	name := pickUpRandom(GetAllNames())
 	return GetByName(name)
 }
 func getCandidates(tw tweet.Tweet) (names []string) {
@@ -36,7 +36,7 @@ func getCandidates(tw tweet.Tweet) (names []string) {
 	}
 	return
 }
-func getAllNames() (names []string) {
+func GetAllNames() (names []string) {
 	names = make([]string, len(my.BotTokens))
 	i := 0
 	for name, _ := range my.BotTokens {
