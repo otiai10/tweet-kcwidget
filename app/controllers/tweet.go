@@ -12,6 +12,13 @@ type Tweet struct {
 
 var reciever = make(chan tweet.Tweet)
 
+func (c Tweet) Suspend() revel.Result {
+	return c.RenderJson(&map[string]string{
+		"result":  "ok",
+		"message": "botちゃんズは一時休憩中です",
+	})
+}
+
 func (c Tweet) validate(screen_name, message, client_token string) (ok bool, errMess string) {
 	ok = true
 	if client_token != my.ServerToken {
