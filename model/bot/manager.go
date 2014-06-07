@@ -9,7 +9,7 @@ func GetByName(name string) Bot {
 	theToken := my.BotTokens[name]
 	return Bot{name, theToken}
 }
-func getTimeKey(candidates map[int]string) int {
+func getTimeKey(candidates map[int][]string) int {
 	hour := time.Now().Hour()
 	key := hour - (hour % (24 / len(candidates)))
 	return key
@@ -23,16 +23,15 @@ func GetRandom() Bot {
 	return GetByName(name)
 }
 func getCandidates(tw tweet.Tweet) (names []string) {
-	_ref := roster[tw.Kind]
-	_except := getTimeKey(_ref)
-	names = make([]string, len(_ref)-1)
-	i := 0
-	for key, name := range _ref {
+	all := roster[tw.Kind]
+	_except := getTimeKey(all)
+	for key, referredNames := range all {
 		if key == _except {
 			continue
 		}
-		names[i] = name
-		i++
+		for _, name := range referredNames {
+			names = append(names, name)
+		}
 	}
 	return
 }
