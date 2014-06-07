@@ -6,8 +6,8 @@ module:testrunner
 
 GET     /                                       App.Index
 
-# POST    /tweet/:action                          Tweet.:action
-POST    /tweet/:action                          Tweet.Suspend
+POST    /tweet/:action                          Tweet.:action
+# POST    /tweet/:action                          Tweet.Suspend
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
